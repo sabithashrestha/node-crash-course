@@ -2,6 +2,27 @@
 <html lang="en">
   <!-- header -->
 <%- include('../partials/head.ejs') %>
+
+<style>
+.blog-nav{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+}
+.blog-nav a{
+  color: #777;
+  max-width: 45%;
+}
+.blog-nav a:hover{
+  color: crimson;
+}
+.blog-nav .next{
+  text-align: right;
+  margin-left: auto;
+}
+</style>
   <body>
     <!-- nav -->
 <%- include('../partials/nav.ejs') %>
@@ -15,6 +36,18 @@
         <a class="delete" data-doc="<%= blog._id %>">
           <img src="/trashcan.svg" alt="delete icon">
           </a>
+
+  <div class="blog-nav">
+<% if (prevBlog) { %>
+            <a href="/blogs/<%= prevBlog._id %>" class="prev">&larr;<%= blog.title %></a>
+<% } else { %>
+            <span></span>
+<% } %>
+
+<% if (nextBlog) { %>
+            <a href="/blogs/<%= nextBlog._id %>" class="next"><%= blog.title %> &rarr;</a>
+<% } %>
+        </div>
    </div>
 
     <!-- footer -->

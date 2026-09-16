@@ -13,11 +13,41 @@ const blog_index = (req, res) => {
     });
 };
 
+// const blog_details = (req, res) => {
+//   const id = req.params.id;
+//   Blog.findById(id)
+//     .then((result) => {
+//       res.render("blogs/details", { blog: result, title: "Blog Details" });
+//     })
+//     .catch((err) => {
+//       res.status(404).render("404", { title: "Blog not found" });
+//     });
+// };
+
 const blog_details = (req, res) => {
   const id = req.params.id;
+
   Blog.findById(id)
-    .then((result) => {
-      res.render("blogs/details", { blog: result, title: "Blog Details" });
+    .then((blog) => {
+      if (!blog) {
+        return res.status(404).render("404", { title: "Blog not found" });
+      }
+
+      return Promise.all([
+        Blog.findOne({ createdAt: { $gt: blog.createdAt } })
+          .sort({ createdAt: 1 })
+          .limit(1),
+        Blog.findOne({ createdAt: { $lt: blog.createdAt } })
+          .sort({ createdAt: -1 })
+          .limit(1),
+      ]).then(([nextBlog, prevBlog]) => {
+        res.render("blogs/details", {
+          blog,
+          title: "Blog Details",
+          nextBlog,
+          prevBlog,
+        });
+      });
     })
     .catch((err) => {
       res.status(404).render("404", { title: "Blog not found" });
