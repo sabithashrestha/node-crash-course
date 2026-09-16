@@ -10,8 +10,8 @@ const blogRoutes = require("./routes/blogRoutes");
 const app = express();
 
 // connct to MongoDB
-const dbURI =
-  "mongodb+srv://newuser:newuser1234@nodetuts.2lzvyzg.mongodb.net/note-tuts";
+require("dotenv").config();
+const dbURI = process.env.MONGODB_URI;
 mongoose
   .connect(dbURI)
   .then((result) => app.listen(3000))
