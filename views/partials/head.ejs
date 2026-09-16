@@ -2,8 +2,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blog |&nbsp;<%= title %></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
     body{
       max-width: 1200px;
       margin: 20px auto;
@@ -115,5 +118,33 @@
       cursor: pointer;
     }
 
+    /* error pages */
+    .error{
+      text-align: center;
+      padding: 80px 0;
+    }
+    .error .code{
+      font-size: 4em;
+      font-weight: 700;
+      color: crimson;
+      margin-bottom: 10px;
+    }
+    .error h2{
+      margin-bottom: 8px;
+    }
+    .error p{
+      color: #777;
+      margin-bottom: 30px;
+    }
+    .error a.btn{
+      display: inline-block;
+      background: crimson;
+      color: white;
+      padding: 10px 24px;
+      font-size: 1.1em;
+    }
+    .error a.btn:hover{
+      cursor: pointer;
+    }
     </style>
   </head>
